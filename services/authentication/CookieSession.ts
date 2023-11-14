@@ -37,7 +37,7 @@ export async function setSession(
     maxAge: 60 * 60 * 24,
     sameSite: "strict",
     httpOnly: true,
-    domain: domain,
+    //domain: domain,
     path: "/",
   });
 }

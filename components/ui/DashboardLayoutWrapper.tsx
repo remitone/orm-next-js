@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { AppShell, Flex, Image, NavLink } from "@mantine/core";
+import { AppShell, Flex, Image as MantineImage, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import BurgerMenu from "./BurgerMenu";
 import {
@@ -18,6 +18,8 @@ import LogoutButton from "./LogoutButton";
 import { signOut } from "@/actions/LogoutAction";
 import { AppSettingsContext } from "@/services/providers/app-settings-context";
 import { useAuthSession } from "@/hooks/useSession";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function DashboardLayoutWrapper({
   children,
@@ -33,6 +35,10 @@ export default function DashboardLayoutWrapper({
     session_token: session.sessionToken,
   };
   const logOut = signOut.bind(null, apiRequestProps);
+  let logoImage = `${appSetting?.domain}-logo.png`;
+  if (appSetting?.domain.includes("localhost")) {
+    logoImage = "localhost-logo.png";
+  }
 
   return (
     <AppShell
@@ -47,13 +53,16 @@ export default function DashboardLayoutWrapper({
       <AppShell.Header>
         <BurgerMenu />
         <div>
-          <Image
+          <MantineImage
+            component={Image}
             w={130}
             h={"auto"}
             fit={"contain"}
             p={15}
-            src="http://localhost/orm/images/logo.png"
-            alt="Logo"
+            src={`/${logoImage}`}
+            width={100}
+            height={100}
+            alt={`${appSetting?.clientName} Logo`}
           />
         </div>
       </AppShell.Header>
@@ -61,36 +70,43 @@ export default function DashboardLayoutWrapper({
       <AppShell.Navbar p="md">
         <NavLink
           label="Home"
+          component={Link}
           leftSection={<IconHome2 size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
           label="Send Money"
+          component={Link}
           leftSection={<IconCashBanknote size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
           label="My Wallet"
+          component={Link}
           leftSection={<IconWallet size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
           label="Check Transfer Status"
+          component={Link}
           leftSection={<IconCheck size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
           label="Beneficiaries"
+          component={Link}
           leftSection={<IconUsers size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
           label="User Guide"
+          component={Link}
           leftSection={<IconInfoCircleFilled size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
           label="Contact Us"
+          component={Link}
           leftSection={<IconMail size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />

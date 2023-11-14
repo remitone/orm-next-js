@@ -13,15 +13,8 @@ async function loadConfigsFromFile() {
 
 async function getTenantConfigs() {
   const headersList = headers();
-  let origin = headersList.get("origin")!;
-  let domain = headersList.get("host") ?? "localhost:3000";
+  let domain = headersList.get("x-forwarded-host") ?? "localhost:3000";
   let hostname = headersList.get("hostname") ?? "localhost";
-  if (origin != null) {
-    const url = new URL(origin);
-    domain = url.host;
-    hostname = url.hostname;
-  }
-
   const configs = await loadConfigsFromFile();
 
   const appSetting = configs[domain] as AppSetting;
