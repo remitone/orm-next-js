@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+"use client";
+
+import React from "react";
 import {
   Avatar,
   Box,
@@ -10,13 +12,13 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
-import { AuthContext } from "../../../common/context/authentication-context";
+import { useAuthSession } from "@/hooks/useSession";
 
 export default function User() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const session = useAuthSession();
   const theme = useMantineTheme();
   const colorScheme = useColorScheme();
-  const { toggleDirection, dir } = useDirection();
+  const { dir } = useDirection();
   return (
     <Box
       style={{
@@ -49,12 +51,10 @@ export default function User() {
           />
           <Box style={{ flex: 1 }}>
             <Text size="sm" fw={500}>
-              {authenticatedUser === null
-                ? "..."
-                : `${authenticatedUser?.firstname} ${authenticatedUser?.lastname}`}
+              {session && session.name ? session?.name : "...."}
             </Text>
             <Text c="dimmed" size="xs">
-              {authenticatedUser?.email}
+              {session && session.username ? session?.username : ""}
             </Text>
           </Box>
 

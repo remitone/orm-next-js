@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Transaction } from "../../types/transaction";
+import { Transaction } from "@/types/transaction";
 import { Box, Flex, Grid, Text } from "@mantine/core";
 import { IconSend } from "@tabler/icons-react";
 
