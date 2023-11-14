@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Space, Text } from "@mantine/core";
-import { headers } from "next/headers";
 import { getTenantConfigs } from "@/utils/settings";
 import ApiClient from "@/services/api/remitterws/client";
 import { TransactionDetailsResponse } from "@/types/transaction-details";
@@ -15,10 +14,7 @@ type TransactionProps = {
 
 async function getTransaction(transRef: string) {
   const authSession = await getSession();
-  const headersList = headers();
-  const host = headersList.get("host")!;
-  const hostname = headersList.get("hostname")!;
-  const tenantConfigs = await getTenantConfigs(host, hostname);
+  const tenantConfigs = await getTenantConfigs();
 
   const apiResponse = await ApiClient.post({
     url: `${tenantConfigs.baseUrl}/transaction/getTransaction`,
