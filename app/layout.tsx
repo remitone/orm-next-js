@@ -2,8 +2,6 @@ import "./globals.css";
 import "@mantine/core/styles.css";
 import { Inter } from "next/font/google";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-//import { AuthContextProvider } from "./services/providers/authentication-context";
-import { headers } from "next/headers";
 import { AppSettingProvider } from "@/services/providers/app-settings-context";
 import { getTenantConfigs } from "@/utils/settings";
 import { Metadata } from "next";
@@ -19,10 +17,7 @@ type Props = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headersList = headers();
-  const host = headersList.get("host") ?? "localhost:3000";
-  const hostname = headersList.get("hostname") ?? "localhost";
-  const tenantConfigs = await getTenantConfigs(host, hostname);
+  const tenantConfigs = await getTenantConfigs();
 
   return {
     title: tenantConfigs.clientName + "- Online Remittance Portal",
@@ -34,12 +29,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = headers();
-  const host = headersList.get("host") ?? "localhost:3000";
-  const hostname = headersList.get("hostname") ?? "localhost";
-  const tenantConfigs = await getTenantConfigs(host, hostname);
+  const tenantConfigs = await getTenantConfigs();
   console.log("Tenant Configs", { tenantConfigs });
-  const domain = headersList.get("REMITONE_DOMAIN");
   const session = await getSession();
 
   return (

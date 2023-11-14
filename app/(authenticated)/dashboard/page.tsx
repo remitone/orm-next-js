@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Box, Text } from "@mantine/core";
-import { headers } from "next/headers";
 import ApiClient from "@/services/api/remitterws/client";
 import { getTenantConfigs } from "@/utils/settings";
 import TransactionList from "@/components/transaction-list";
@@ -10,10 +9,7 @@ import { getSession } from "@/services/authentication/CookieSession";
 import { AuthSession } from "@/types/schema";
 
 async function getTransactionList(authSession: AuthSession) {
-  const headersList = headers();
-  const host = headersList.get("host")!;
-  const hostname = headersList.get("hostname")!;
-  const tenantConfigs = await getTenantConfigs(host, hostname);
+  const tenantConfigs = await getTenantConfigs();
 
   const apiResponse = await ApiClient.post({
     url: `${tenantConfigs.baseUrl}/transaction/listTransactions`,

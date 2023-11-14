@@ -85,7 +85,7 @@ export async function LoginAction(
 
   const remitter = remitterResponse.result?.remitter;
 
-  let domain = "." + appSettings.hostname;
+  const domain = "." + appSettings.hostname;
 
   const session: AuthSession = {
     id: remitter?.remitter_id as unknown as string,

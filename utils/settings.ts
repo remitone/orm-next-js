@@ -1,20 +1,5 @@
 import { promises as fs } from "fs";
-
-const getConfig = (name: string): string | null => {
-  //const headersList = headers();
-  //const appSettings = useContext(AppSettingContext);
-
-  const domain = "";
-  //const domain = headersList.get("REMITONE_DOMAIN");
-  const configName = `${name}_${domain}`;
-  // if (headersList.has(config)) {
-  //     return headersList.get(config);
-  // }
-  return process.env[configName] ?? null;
-
-  //const serverPublicKey = `SERVER_PUBLIC_KEY_${domain}`;
-  //const primaryColour = `PRIMARY_COLOUR_${domain}`;
-};
+import { headers } from "next/headers";
 
 async function loadConfigsFromFile() {
   const configsFile = await fs.readFile(
@@ -26,7 +11,17 @@ async function loadConfigsFromFile() {
   return configs;
 }
 
-async function getTenantConfigs(domain: string, hostname: string) {
+async function getTenantConfigs() {
+  const headersList = headers();
+  let origin = headersList.get("origin")!;
+  let domain = headersList.get("host") ?? "localhost:3000";
+  let hostname = headersList.get("hostname") ?? "localhost";
+  if (origin != null) {
+    const url = new URL(origin);
+    domain = url.host;
+    hostname = url.hostname;
+  }
+
   const configs = await loadConfigsFromFile();
 
   const appSetting = configs[domain] as AppSetting;
@@ -34,4 +29,4 @@ async function getTenantConfigs(domain: string, hostname: string) {
   return { ...appSetting, domain, hostname };
 }
 
-export { getConfig, loadConfigsFromFile, getTenantConfigs };
+export { loadConfigsFromFile, getTenantConfigs };
