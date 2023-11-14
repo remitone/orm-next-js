@@ -9,7 +9,7 @@ import { TransactionListResponse } from "@/types/transaction";
 import { getSession } from "@/services/authentication/CookieSession";
 import { AuthSession } from "@/types/schema";
 
-export async function getTransactionList(authSession: AuthSession) {
+async function getTransactionList(authSession: AuthSession) {
   const headersList = headers();
   const host = headersList.get("host")!;
   const hostname = headersList.get("hostname")!;

@@ -1,10 +1,7 @@
-import ApiClient from "./client";
-import { RemitterResponse } from "../../../types/remitter";
-
-const getRemitterProfile = async (domain: string) => {
-  const response = await ApiClient(domain).post("/remitterUser/getProfile");
-
-  return response.data.response as RemitterResponse;
-};
-
-export { getRemitterProfile };
+// const getRemitterProfile = async (domain: string) => {
+//   const response = await ApiClient(domain).post("/remitterUser/getProfile");
+//
+//   return response.data.response as RemitterResponse;
+// };
+//
+// export { getRemitterProfile };

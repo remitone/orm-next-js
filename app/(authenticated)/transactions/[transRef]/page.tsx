@@ -13,7 +13,7 @@ type TransactionProps = {
   };
 };
 
-export async function getTransaction(transRef: string) {
+async function getTransaction(transRef: string) {
   const authSession = await getSession();
   const headersList = headers();
   const host = headersList.get("host")!;

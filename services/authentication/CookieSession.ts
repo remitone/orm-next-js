@@ -1,6 +1,5 @@
 import { sealData, unsealData } from "iron-session/edge";
 import { cookies } from "next/headers";
-import process from "process";
 import { AuthSession } from "@/types/schema";
 
 const sessionPassword = process.env.COOKIE_SESSION_PASSWORD as string;
