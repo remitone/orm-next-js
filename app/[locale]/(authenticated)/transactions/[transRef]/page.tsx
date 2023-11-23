@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Box, Space, Text } from "@mantine/core";
-import Loading from "@/app/(authenticated)/dashboard/loading";
-import TransDetails from "@/app/(authenticated)/transactions/[transRef]/TransDetails";
+import Loading from "@/app/[locale]/(authenticated)/dashboard/loading";
+import TransDetails from "@/app/[locale]/(authenticated)/transactions/[transRef]/TransDetails";
 
 type TransactionProps = {
   params: {

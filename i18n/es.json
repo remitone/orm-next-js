@@ -1,0 +1,39 @@
+{
+  "Login": {
+    "welcome_text": "Bienvenido de nuevo.",
+    "new_user_register_link_text": "¿Nuevo en RemitONE?",
+    "sign_up_link_text": "Inscribirse",
+    "fields": {
+      "username": "Su dirección de correo electrónico",
+      "password": "Contraseña",
+      "submit_button": "Iniciar sesión",
+      "forgot_password": "¿Problemas para iniciar sesión?"
+    },
+    "placeholders": {
+      "username": "your@email.com",
+      "password": "secreta"
+    }
+  },
+  "LocalSwitcher": {
+    "fields": {
+      "language_select": "Idioma"
+    }
+  },
+  "Dashboard": {
+    "sideMenu": {
+      "home": "Hogar",
+      "start_transaction": "Enviar dinero",
+      "wallet": "Mi billetera",
+      "transfer_status": "Verificar estado de transferencia",
+      "beneficiaries": "Beneficiarias",
+      "user_guide": "Guía del usuario",
+      "contact_us": "Contacta con nosotras"
+    },
+    "page": {
+      "logout_button": "Cerrar sesión",
+      "welcome_title": "Bienvenida {name}",
+      "recent_transaction_title": "Transacciones Recientes",
+      "recent_transaction_description": "Estas son tus transacciones recientes"
+    }
+  }
+}

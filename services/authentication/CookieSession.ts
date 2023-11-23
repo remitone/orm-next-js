@@ -1,6 +1,5 @@
 import { sealData, unsealData } from "iron-session/edge";
 import { cookies } from "next/headers";
-import { AuthSession } from "@/types/schema";
 
 const sessionPassword = process.env.COOKIE_SESSION_PASSWORD as string;
 if (!sessionPassword) throw new Error("COOKIE_SESSION_PASSWORD is not set");

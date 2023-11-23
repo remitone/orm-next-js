@@ -22,4 +22,6 @@ async function getTenantConfigs() {
   return { ...appSetting, domain, hostname };
 }
 
+//const supportedLocals: string[] = ["en", "es", "si", "ar"];
+
 export { loadConfigsFromFile, getTenantConfigs };

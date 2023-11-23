@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useEffect } from "react";
-import { AuthSession } from "@/types/schema";
 
 export const AuthContext = createContext<AuthSession | null>(null);
 export default function AuthSessionProvider({

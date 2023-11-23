@@ -1,5 +1,5 @@
 import React from "react";
-import TransactionCard from "@/app/(authenticated)/transactions/TransactionCard";
+import TransactionCard from "@/app/[locale]/(authenticated)/transactions/TransactionCard";
 import { getSession } from "@/services/authentication/CookieSession";
 import { getTenantConfigs } from "@/utils/settings";
 import ApiClient from "@/services/api/remitterws/client";

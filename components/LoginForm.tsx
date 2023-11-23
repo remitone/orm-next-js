@@ -14,13 +14,15 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconX } from "@tabler/icons-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/navigation";
 import { useContext, useState } from "react";
 import LoginButton from "@/components/LoginButton";
 import { z } from "zod";
 import { AppSettingsContext } from "@/services/providers/app-settings-context";
 import { useForm, zodResolver } from "@mantine/form";
 import { LoginAction } from "@/actions/LoginAction";
+import { useRemitterStore } from "@/services/store/RemitterStore";
+import { useTranslations } from "next-intl";
 
 const LoginFormSchema = z.object({
   username: z.string().email(),
@@ -33,11 +35,11 @@ const LoginFormSchema = z.object({
 });
 
 export default function LoginForm() {
+  const t = useTranslations("Login");
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [visible, { toggle }] = useDisclosure(false);
 
-  //const { login } = useContext(AuthContext);
   const appSettings = useContext(AppSettingsContext);
   const xIcon = <IconX style={{ width: rem(20), height: rem(20) }} />;
 
@@ -62,6 +64,8 @@ export default function LoginForm() {
         // @ts-ignore
         const loginActionResponse = await LoginAction(appSettings!, loginData);
 
+        console.log("Login Response", { loginActionResponse });
+        //console.log("Remitter Response", loginActionResponse.remitter);
         if (loginActionResponse?.success) {
           router.push("/dashboard");
         }
@@ -81,10 +85,10 @@ export default function LoginForm() {
     <main>
       <Container p={"20px"} mt={20} ta={"center"} pos="relative">
         <Text size="xl" fw={"bold"}>
-          Welcome back.
+          {t("welcome_text")}
         </Text>
         <Text pt="5" c="grey" size="sm">
-          New to RemitONE?
+          {t("new_user_register_link_text")}
           <Anchor
             component={Link}
             href={"/signup"}
@@ -93,7 +97,7 @@ export default function LoginForm() {
             td={"underline"}
           >
             {" "}
-            Sign Up
+            {t("sign_up_link_text")}
           </Anchor>
         </Text>
 
@@ -112,8 +116,8 @@ export default function LoginForm() {
           <form action={handleLoginSubmit}>
             <TextInput
               withAsterisk
-              label="Your email address"
-              placeholder="your@email.com"
+              label={t("fields.username")}
+              placeholder={t("placeholders.username")}
               type="email"
               ta="left"
               mb="10"
@@ -122,8 +126,8 @@ export default function LoginForm() {
             />
             <PasswordInput
               withAsterisk
-              placeholder="secret"
-              label="Password"
+              placeholder={t("placeholders.password")}
+              label={t("fields.password")}
               visible={visible}
               min="8"
               ta="left"
@@ -148,7 +152,7 @@ export default function LoginForm() {
             display="block"
             ta="left"
           >
-            Trouble Logging in?
+            {t("fields.forgot_password")}
           </Anchor>
         </Box>
       </Container>

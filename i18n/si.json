@@ -1,0 +1,39 @@
+{
+  "Login": {
+    "welcome_text": "ආපසු සාදරයෙන් පිළිගනිමු.",
+    "new_user_register_link_text": "RemitONE වෙත අලුත්ද?",
+    "sign_up_link_text": "ලියාපදිංචි වන්න",
+    "fields": {
+      "username": "ඔයාගේ ඊතැපැල් ලිපිනය",
+      "password": "මුරපදය",
+      "submit_button": "පුරන්න",
+      "forgot_password": "ලොග් වීමේ ගැටලුවක්ද?"
+    },
+    "placeholders": {
+      "username": "your@email.com",
+      "password": "රහස"
+    }
+  },
+  "LocalSwitcher": {
+    "fields": {
+      "language_select": "භාෂාව"
+    }
+  },
+  "Dashboard": {
+    "sideMenu": {
+      "home": "ගෙදර",
+      "start_transaction": "මුදල් එවන්න",
+      "wallet": "ම ෙග් පසුම්බිය",
+      "transfer_status": "මාරු තත්ත්වය පරීක්ෂා කරන්න",
+      "beneficiaries": "ප්රතිලාභ",
+      "user_guide": "පරිශීලක මාර්ගෝපදේශය",
+      "contact_us": "අපව අමතන්න"
+    },
+    "page": {
+      "logout_button": "පිටවීම",
+      "welcome_title": "සාදරයෙන් පිළිගනිමු {name}",
+      "recent_transaction_title": "මෑත ගනුදෙනු",
+      "recent_transaction_description": "මේවා ඔබගේ මෑත ගනුදෙනු වේ"
+    }
+  }
+}

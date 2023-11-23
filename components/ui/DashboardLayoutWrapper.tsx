@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useContext } from "react";
-import { AppShell, Flex, Image as MantineImage, NavLink } from "@mantine/core";
+import {
+  AppShell,
+  Box,
+  Flex,
+  Image as MantineImage,
+  NavLink,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import BurgerMenu from "./BurgerMenu";
 import {
@@ -13,13 +19,15 @@ import {
   IconUsers,
   IconWallet,
 } from "@tabler/icons-react";
-import User from "../../app/(authenticated)/dashboard/_user";
+import User from "@/app/[locale]/(authenticated)/dashboard/_user";
 import LogoutButton from "./LogoutButton";
 import { signOut } from "@/actions/LogoutAction";
 import { AppSettingsContext } from "@/services/providers/app-settings-context";
 import { useAuthSession } from "@/hooks/useSession";
-import Link from "next/link";
+import { Link } from "@/lib/navigation";
 import Image from "next/image";
+import LocalSwitcher from "@/components/LocalSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function DashboardLayoutWrapper({
   children,
@@ -29,6 +37,7 @@ export default function DashboardLayoutWrapper({
   const [opened, { toggle }] = useDisclosure();
   const appSetting = useContext(AppSettingsContext);
   const session = useAuthSession();
+  const t = useTranslations();
   const apiRequestProps: ApiRequestProps = {
     baseUrl: appSetting?.baseUrl!,
     username: session.username,
@@ -69,43 +78,43 @@ export default function DashboardLayoutWrapper({
 
       <AppShell.Navbar p="md">
         <NavLink
-          label="Home"
+          label={t("Dashboard.sideMenu.home")}
           component={Link}
           leftSection={<IconHome2 size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
-          label="Send Money"
+          label={t("Dashboard.sideMenu.start_transaction")}
           component={Link}
           leftSection={<IconCashBanknote size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
-          label="My Wallet"
+          label={t("Dashboard.sideMenu.wallet")}
           component={Link}
           leftSection={<IconWallet size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
-          label="Check Transfer Status"
+          label={t("Dashboard.sideMenu.transfer_status")}
           component={Link}
           leftSection={<IconCheck size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
-          label="Beneficiaries"
+          label={t("Dashboard.sideMenu.beneficiaries")}
           component={Link}
           leftSection={<IconUsers size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
-          label="User Guide"
+          label={t("Dashboard.sideMenu.user_guide")}
           component={Link}
           leftSection={<IconInfoCircleFilled size="2rem" stroke={1.5} />}
           href={"/dashboard"}
         />
         <NavLink
-          label="Contact Us"
+          label={t("Dashboard.sideMenu.contact_us")}
           component={Link}
           leftSection={<IconMail size="2rem" stroke={1.5} />}
           href={"/dashboard"}
@@ -116,7 +125,12 @@ export default function DashboardLayoutWrapper({
       </AppShell.Navbar>
 
       <AppShell.Main>
-        <Flex align={"flex-end"} justify={"flex-end"} mt={20}>
+        <Flex align={"flex-end"} justify={"flex-end"} mt={20} gap="md">
+          <Box miw={100}>
+            <LocalSwitcher
+              language={t("LocalSwitcher.fields.language_select")}
+            />
+          </Box>
           <form action={logOut}>
             <LogoutButton />
           </form>

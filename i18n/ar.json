@@ -1,0 +1,39 @@
+{
+  "Login": {
+    "welcome_text": "مرحبًا بعودتك.",
+    "new_user_register_link_text": "هل أنت جديد في RemitONE؟",
+    "sign_up_link_text": "اشتراك",
+    "fields": {
+      "username": "عنوان بريدك  الإلكتروني",
+      "password": "كلمة المرور",
+      "submit_button": "تسجيل الدخول",
+      "forgot_password": "مشكلة في تسجيل الدخول؟"
+    },
+    "placeholders": {
+      "username": "your@email.com",
+      "password": "سر"
+    }
+  },
+  "LocalSwitcher": {
+    "fields": {
+      "language_select": "لغة"
+    }
+  },
+  "Dashboard": {
+    "sideMenu": {
+      "home": "بيت",
+      "start_transaction": "إرسال الأموال",
+      "wallet": "محفظتى",
+      "transfer_status": "التحقق من حالة النقل",
+      "beneficiaries": "المستفيدون",
+      "user_guide": "دليل المستخدم",
+      "contact_us": "اتصل بنا"
+    },
+    "page": {
+      "logout_button": "تسجيل خروج",
+      "welcome_title": "مرحباً {name}",
+      "recent_transaction_title": "التحويلات الاخيرة",
+      "recent_transaction_description": "هذه هي معاملاتك الأخيرة"
+    }
+  }
+}

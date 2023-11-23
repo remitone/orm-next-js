@@ -14,22 +14,32 @@ declare global {
   }
 
   interface LoginResponse extends BaseResponse {
-    result?: LoginResult;
+    result?: LoginResult | LoginResultLegacy;
   }
-
-  const r1BooleanSchema = z.custom<`${string}`>((val) => {
-    return val == "true" || value == "1" || value == "t";
-  });
-
-  type r1Boolean = z.infer<typeof r1BooleanSchema>;
 
   interface LoginResult {
     session_token?: string;
     two_factor_authentication?: TwoFactorAuthentication;
     transfer_types?: TransferTypes;
-    remitter_wallet?: string;
-    wallet_transfer_enabled?: boolean;
-    loyalty_points?: boolean;
+    remitter_wallet?: R1Boolean;
+    wallet_transfer_enabled?: R1Boolean;
+    loyalty_points?: R1Boolean;
+  }
+
+  interface RemitterWalletLegacy {
+    wallet_enabled: R1Boolean;
+    wallet_transfer_enabled: R1Boolean;
+  }
+
+  export type R1Boolean = "f" | "t" | boolean | "true" | "false" | "1" | "0";
+
+  //backward compatibility result
+  interface LoginResultLegacy {
+    session_token?: string;
+    two_factor_authentication?: TwoFactorAuthentication;
+    transfer_types?: TransferTypes;
+    loyalty_points: R1Boolean;
+    remitter_wallet: RemitterWalletLegacy;
   }
 
   interface TransferTypes {
@@ -37,9 +47,9 @@ declare global {
   }
 
   interface TwoFactorAuthentication {
-    required?: string;
+    required?: R1Boolean;
     type?: string;
-    can_resend_code?: boolean;
+    can_resend_code?: R1Boolean;
   }
 
   interface LoginData {
@@ -57,8 +67,6 @@ declare global {
   }
 
   interface LogoutResponse extends BaseResponse {}
-
-  export type R1Boolean = "f" | "t" | boolean | "true" | "false" | "1" | "0";
 
   type AppSettings = AppSetting[];
 
@@ -89,11 +97,35 @@ declare global {
     error: boolean;
     success?: boolean;
     message?: string;
+    remitter?: Remitter;
   };
 
   type ApiRequestProps = {
     baseUrl: string;
     username: string;
     session_token: string;
+  };
+
+  type GlobalSystemSettings = {
+    twoFactorSettings: {
+      required: boolean;
+      type: string;
+      canResedCode: boolean;
+    };
+    transferTypes: string[];
+    walletEnabled: boolean;
+    walletTransferEnabled: boolean;
+    loyaltyPointsEnabled: boolean;
+  };
+
+  enum UsernameType {
+    Email = "email",
+    Mobile = "mobile",
+  }
+
+  type AuthSession = {
+    sessionToken: string;
+    username: string;
+    settings: GlobalSystemSettings;
   };
 }

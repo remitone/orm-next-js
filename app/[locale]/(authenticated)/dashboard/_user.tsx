@@ -13,12 +13,20 @@ import {
 } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
 import { useAuthSession } from "@/hooks/useSession";
+import { useRemitterStore } from "@/services/store/RemitterStore";
+import { useRemitter } from "@/services/providers/RemitterUserProvider";
 
 export default function User() {
   const session = useAuthSession();
   const theme = useMantineTheme();
   const colorScheme = useColorScheme();
   const { dir } = useDirection();
+  const RemitterHook = useRemitter();
+  const remitter = RemitterHook((state) => state.remitter);
+  //const remitter = session.remitter!;
+  //const remitter = useRemitterStore((state) => state.remitter);
+
+  console.log("Remitter =>", remitter);
   return (
     <Box
       style={{
@@ -51,10 +59,11 @@ export default function User() {
           />
           <Box style={{ flex: 1 }}>
             <Text size="sm" fw={500}>
-              {session && session.name ? session?.name : "...."}
+              {remitter && remitter.firstname ? remitter?.firstname : "...."}
             </Text>
+            <Text>{remitter?.lastname}</Text>
             <Text c="dimmed" size="xs">
-              {session && session.username ? session?.username : ""}
+              {session && session?.username ? session?.username : ""}
             </Text>
           </Box>
 

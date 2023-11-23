@@ -4,9 +4,11 @@ import React from "react";
 import { Button } from "@mantine/core";
 // @ts-ignore
 import { useFormStatus as useFormStatus } from "react-dom";
+import { useTranslations } from "next-intl";
 
 export default function LoginButton() {
   const { pending } = useFormStatus();
+  const t = useTranslations("Login");
   return (
     <Button
       fullWidth
@@ -15,7 +17,7 @@ export default function LoginButton() {
       loading={pending}
       disabled={pending}
     >
-      Login
+      {t("fields.submit_button")}
     </Button>
   );
 }
