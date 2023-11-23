@@ -1,6 +1,3 @@
-import { unsealData } from "iron-session/edge";
-import { AuthSessionSchema } from "@/types/schema";
-
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.
@@ -55,20 +52,3 @@ export const getErrorMessage = (error: unknown): string => {
 
   return message;
 };
-
-export async function getAuthSessionFromCookie(encryptedSession: string) {
-  const session = encryptedSession
-    ? await unsealData(encryptedSession, {
-        password: process.env.COOKIE_SESSION_PASSWORD!,
-      })
-    : null;
-
-  const authSession = AuthSessionSchema.safeParse(
-    JSON.parse(session as unknown as string),
-  );
-  if (!authSession.success) {
-    throw new Error(authSession.error.message);
-  }
-
-  return authSession.data;
-}
